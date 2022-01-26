@@ -37,7 +37,7 @@ func TestFilesRepository(t *testing.T) {
 
 			// Make sure that the results are equal
 			if tc.res != nil && !reflect.DeepEqual(tc.res, m) {
-				t.Errorf("%s: repository did not match the expected value")
+				t.Errorf("%s: repository did not match the expected value", tc.name)
 				t.Logf("output: %#v", m)
 				t.Logf("expected: %#v", tc.res)
 			}

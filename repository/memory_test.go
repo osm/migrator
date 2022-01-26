@@ -25,7 +25,7 @@ func TestMemoryRepository(t *testing.T) {
 
 			// Make sure that the results are equal
 			if !reflect.DeepEqual(tc.data, m) {
-				t.Errorf("%s: repo did not match the expected value")
+				t.Errorf("%s: repo did not match the expected value", tc.name)
 				t.Logf("output: %#v", m)
 				t.Logf("expected: %#v", tc.data)
 			}
