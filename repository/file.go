@@ -2,7 +2,7 @@ package repository
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path"
 	"regexp"
 	"strconv"
@@ -25,7 +25,7 @@ func FromFiles(dir string) Source {
 // was created.
 func (r *files) Load() (map[int]string, error) {
 	// List all files within the directory
-	files, err := ioutil.ReadDir(r.dir)
+	files, err := os.ReadDir(r.dir)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (r *files) Load() (map[int]string, error) {
 		}
 
 		// Read the contents of the file
-		d, err := ioutil.ReadFile(path.Join(r.dir, n))
+		d, err := os.ReadFile(path.Join(r.dir, n))
 		if err != nil {
 			return nil, err
 		}
