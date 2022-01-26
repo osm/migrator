@@ -30,5 +30,5 @@ func (r *embedFiles) Load() (map[int]string, error) {
 		return nil, err
 	}
 
-	return loadFiles(files, r.dir)
+	return loadFiles(files, r.dir, &r.embedFS)
 }

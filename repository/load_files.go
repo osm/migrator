@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"embed"
 	"fmt"
 	"io/fs"
 	"os"
@@ -19,7 +20,7 @@ func init() {
 	versionRegexp = regexp.MustCompile("^[0-9]+$")
 }
 
-func loadFiles(files []fs.DirEntry, dir string) (map[int]string, error) {
+func loadFiles(files []fs.DirEntry, dir string, efs *embed.FS) (map[int]string, error) {
 	// Store all migrations within this map
 	ret := make(map[int]string)
 
@@ -54,7 +55,13 @@ func loadFiles(files []fs.DirEntry, dir string) (map[int]string, error) {
 		}
 
 		// Read the contents of the file
-		d, err := os.ReadFile(path.Join(dir, n))
+		var d []byte
+		var err error
+		if efs != nil {
+			d, err = efs.ReadFile(path.Join(dir, n))
+		} else {
+			d, err = os.ReadFile(path.Join(dir, n))
+		}
 		if err != nil {
 			return nil, err
 		}

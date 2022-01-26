@@ -27,5 +27,5 @@ func (r *files) Load() (map[int]string, error) {
 		return nil, err
 	}
 
-	return loadFiles(files, r.dir)
+	return loadFiles(files, r.dir, nil)
 }
